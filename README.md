@@ -1,5 +1,5 @@
 # Personal Passion Project
-To graduate as student 'Digital Design and Development' at Devine Kask, one of the requirements is to create and execute a personal project. This project consists out of a self-chosen subject that has our interest. The only must to this project is that it should be a challenge where we have to educate ourself a new subject: a new coding language, new framework, ...
+To graduate as a student 'Digital Design and Development' at Devine Kask, one of the requirements is to create and execute a personal project. This project consists out of a self-chosen subject that has our interest. The only must to this project is that it should be a challenge where we have to educate ourself a new subject: a new coding language, new framework, ...
 
 ## Local
 My Personal Passion Project is Local. Local will be an WebApp built in React & React Native with a back-end side of Node.js. 
