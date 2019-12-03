@@ -1,13 +1,17 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import Colors from "../constants/Colors";
 
 const styles = StyleSheet.create({
   item: {
     flex: 1,
     margin: 16,
-    height: 110
-    // borderRadius: 10,
-    // overflow: "hidden"
+    height: 110,
+    borderRadius: 10,
+    overflow:
+      Platform.OS === "android" && Platform.Version >= 21
+        ? "hidden"
+        : "visible",
+    elevation: 3
   },
 
   rippleItem: { flex: 1 },
