@@ -11,6 +11,8 @@ const DetailScreen = props => {
   return (
     <View style={styles.container}>
       <Text>{selectedSpot.name}</Text>
+      <Text>{selectedSpot.rating}</Text>
+      <Text>{selectedSpot.desc}</Text>
     </View>
   );
 };

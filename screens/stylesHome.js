@@ -25,11 +25,7 @@ const styles = StyleSheet.create({
     marginLeft: 16
   },
 
-  item: {
-    flex: 1,
-    margin: 16,
-    height: 80
-  }
+  
 });
 
 export default styles;
