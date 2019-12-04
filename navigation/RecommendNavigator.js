@@ -9,10 +9,12 @@ import { createAppContainer } from "react-navigation";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 
 import HomeScreen from "../screens/HomeScreen";
+import FilterScreen from "../screens/FilterScreen";
 import BigMapScreen from "../screens/BigMapScreen";
 import DetailScreen from "../screens/DetailScreen";
 import ListsScreen from "../screens/ListsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import PreferencesScreen from "../screens/PreferencesScreen";
 
 const RecommendNavigator = createStackNavigator({
   Home: {
@@ -38,6 +40,78 @@ const RecommendNavigator = createStackNavigator({
     })
   }
 });
+const FilterNavigator = createStackNavigator({
+  Home: {
+    screen: HomeScreen,
+    navigationOptions: () => ({
+      title: `Home`,
+      headerBackTitle: `Back`,
+      headerStyle: {
+        backgroundColor: Colors.primaryColor
+      },
+      headerTintColor: Colors.bColor
+    })
+  },
+  Filter: {
+    screen: FilterScreen,
+    navigationOptions: () => ({
+      headerBackTitle: `Back`,
+      headerStyle: {
+        backgroundColor: Colors.primaryColor
+      },
+      headerTintColor: Colors.bColor
+    })
+  }
+});
+
+const ListNavigator = createStackNavigator({
+  ListOverview: {
+    screen: ListsScreen,
+    navigationOptions: () => ({
+      title: `Your Lists`,
+      headerBackTitle: `Back`,
+      headerStyle: {
+        backgroundColor: Colors.primaryColor
+      },
+      headerTintColor: Colors.bColor
+    })
+  },
+  Detail: {
+    screen: DetailScreen,
+    navigationOptions: () => ({
+      headerBackTitle: `Back`,
+      headerStyle: {
+        backgroundColor: Colors.primaryColor
+      },
+      headerTintColor: Colors.bColor
+    })
+  }
+});
+
+const ProfileNavigator = createStackNavigator({
+  ProfileOverview: {
+    screen: ProfileScreen,
+    navigationOptions: () => ({
+      title: `Your Profile`,
+      headerBackTitle: `Back`,
+      headerStyle: {
+        backgroundColor: Colors.primaryColor
+      },
+      headerTintColor: Colors.bColor
+    })
+  },
+  Prefrences: {
+    screen: PreferencesScreen,
+    navigationOptions: () => ({
+      title: `Your Preferences`,
+      headerBackTitle: `Back`,
+      headerStyle: {
+        backgroundColor: Colors.primaryColor
+      },
+      headerTintColor: Colors.bColor
+    })
+  }
+});
 
 const tabScreenConfig = {
   Home: {
@@ -49,7 +123,7 @@ const tabScreenConfig = {
     }
   },
   Lists: {
-    screen: ListsScreen,
+    screen: ListNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
         return <Ionicons name="ios-list" size={28} color={tabInfo.tintColor} />;
@@ -57,7 +131,7 @@ const tabScreenConfig = {
     }
   },
   Profile: {
-    screen: ProfileScreen,
+    screen: ProfileNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
         return (

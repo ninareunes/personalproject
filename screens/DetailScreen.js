@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
 
@@ -30,10 +31,11 @@ DetailScreen.navigationOptions = navigationData => {
     headerRight: (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
-          title="Favorite"
-          iconName="ios-star-outline"
+          title="Bookmark"
+          MyIconComponent={MaterialIcons}
+          iconName="bookmark-border"
           onPress={() => {
-            console.log("Mark as favorite!");
+            console.log("Bookmarked");
           }}
         />
       </HeaderButtons>

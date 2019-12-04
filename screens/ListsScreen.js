@@ -1,13 +1,11 @@
 import React from "react";
-import { Text, View } from "react-native";
+import SpotList from "../components/SpotList";
 import styles from "./stylesLists";
+import { SPOTS } from "../data/dummy-data";
 
 const ListsScreen = props => {
-  return (
-    <View style={styles.container}>
-      <Text>Lists screen.</Text>
-    </View>
-  );
+  const favSpots = SPOTS.filter(spot => spot.name != "");
+  return <SpotList listData={favSpots} navigation={props.navigation} />;
 };
 
 export default ListsScreen;

@@ -1,40 +1,22 @@
 import React from "react";
-import { FlatList, View } from "react-native";
+import { View, Button } from "react-native";
 import { SPOTS } from "../data/dummy-data";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
-
 // import SearchSvg from "../components/SearchSvg";
-import HomeTile from "../components/HomeTile";
+import { Ionicons } from "@expo/vector-icons";
+
+import SpotList from "../components/SpotList";
 
 const HomeScreen = props => {
-  const renderGridItem = itemData => {
-    return (
-      <HomeTile
-        name={itemData.item.name}
-        desc={itemData.item.desc}
-        img={itemData.item.img}
-        rating={itemData.item.rating}
-        style={{ width: "100%" }}
-        onSelect={() => {
-          // console.log(itemData.item.img);
-          props.navigation.navigate({
-            routeName: "Detail",
-            params: {
-              spotId: itemData.item.id
-            }
-          });
-        }}
-      />
-    );
-  };
-
   return (
-    <FlatList
-      keyExtractor={(item, index) => item.id}
-      data={SPOTS}
-      renderItem={renderGridItem}
-    />
+    <View>
+      <View>
+        <Button title="Filter" />
+      </View>
+
+      <SpotList listData={SPOTS} navigation={props.navigation} />
+    </View>
   );
 };
 
@@ -48,11 +30,11 @@ HomeScreen.navigationOptions = {
   headerLeft: (
     <HeaderButtons HeaderButtonComponent={HeaderButton}>
       <Item
-        title="Bookmark"
-        MyIconComponent={MaterialIcons}
-        iconName="bookmark-border"
+        title="Search"
+        MyIconComponent={Ionicons}
+        iconName="ios-search"
         onPress={() => {
-          console.log("Boormarked!");
+          console.log("Search!");
         }}
       />
     </HeaderButtons>
