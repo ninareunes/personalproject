@@ -1,8 +1,10 @@
 import React from "react";
-import { Text, View, TouchableOpacity, Button, FlatList } from "react-native";
+import { FlatList, View } from "react-native";
 import { SPOTS } from "../data/dummy-data";
-import styles from "./stylesHome";
-import SearchSvg from "../components/SearchSvg";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import HeaderButton from "../components/HeaderButton";
+
+// import SearchSvg from "../components/SearchSvg";
 import HomeTile from "../components/HomeTile";
 
 const HomeScreen = props => {
@@ -37,7 +39,24 @@ const HomeScreen = props => {
 };
 
 HomeScreen.navigationOptions = {
-  headerTitle: "Neighbourhood"
+  headerTitle: "Neighbourhood",
+  headerTitleStyle: {
+    textAlign: "center",
+    flex: 1
+    // marginRight: 90
+  },
+  headerLeft: (
+    <HeaderButtons HeaderButtonComponent={HeaderButton}>
+      <Item
+        title="Search"
+        iconName="ios-search"
+        onPress={() => {
+          console.log("Search for something");
+        }}
+      />
+    </HeaderButtons>
+  ),
+  headerRight: <View style={{ padding: 6 }}></View>
 };
 
 export default HomeScreen;

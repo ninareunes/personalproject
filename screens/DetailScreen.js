@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
+
 import styles from "./stylesDetail";
 
 import { SPOTS } from "../data/dummy-data";
@@ -32,7 +33,7 @@ DetailScreen.navigationOptions = navigationData => {
           title="Favorite"
           iconName="ios-star-outline"
           onPress={() => {
-            console.log("Mark as favorite");
+            console.log("Mark as favorite!");
           }}
         />
       </HeaderButtons>
