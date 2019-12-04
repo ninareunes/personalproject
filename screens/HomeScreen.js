@@ -48,10 +48,11 @@ HomeScreen.navigationOptions = {
   headerLeft: (
     <HeaderButtons HeaderButtonComponent={HeaderButton}>
       <Item
-        title="Search"
-        iconName="ios-search"
+        title="Bookmark"
+        MyIconComponent={MaterialIcons}
+        iconName="bookmark-border"
         onPress={() => {
-          console.log("Search for something");
+          console.log("Boormarked!");
         }}
       />
     </HeaderButtons>

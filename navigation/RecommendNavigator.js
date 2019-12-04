@@ -44,16 +44,15 @@ const tabScreenConfig = {
     screen: RecommendNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
-        return <Ionicons name="ios-home" size={25} color={tabInfo.tintColor} />;
-      },
-      tabBarColor: "black"
+        return <Ionicons name="ios-home" size={28} color={tabInfo.tintColor} />;
+      }
     }
   },
   Lists: {
     screen: ListsScreen,
     navigationOptions: {
       tabBarIcon: tabInfo => {
-        return <Ionicons name="ios-list" size={25} color={tabInfo.tintColor} />;
+        return <Ionicons name="ios-list" size={28} color={tabInfo.tintColor} />;
       }
     }
   },
@@ -62,7 +61,7 @@ const tabScreenConfig = {
     navigationOptions: {
       tabBarIcon: tabInfo => {
         return (
-          <Ionicons name="md-person" size={25} color={tabInfo.tintColor} />
+          <Ionicons name="md-person" size={28} color={tabInfo.tintColor} />
         );
       }
     }
@@ -73,9 +72,9 @@ const RootNavigator =
   Platform.OS === "android"
     ? createMaterialBottomTabNavigator(tabScreenConfig, {
         activeColor: Colors.primaryColor,
-        shifting: false,
+        shifting: true,
         barStyle: {
-          backgroundColor: Colors.bColor
+          backgroundColor: "white"
         }
       })
     : createBottomTabNavigator(tabScreenConfig, {
