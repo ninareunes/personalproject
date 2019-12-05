@@ -47,34 +47,36 @@ const RecommendNavigator = createStackNavigator(
         },
         headerTintColor: Colors.bColor
       })
-    }
-  },
-  { defaultNavigationOptions: defaultStackNavOptions }
-);
-const FilterNavigator = createStackNavigator(
-  {
-    Home: {
-      screen: HomeScreen,
-      navigationOptions: () => ({
-        title: `Home`,
-        headerStyle: {
-          backgroundColor: Colors.primaryColor
-        },
-        headerTintColor: Colors.bColor
-      })
     },
-    Filter: {
-      screen: FilterScreen,
-      navigationOptions: () => ({
-        headerStyle: {
-          backgroundColor: Colors.primaryColor
-        },
-        headerTintColor: Colors.bColor
-      })
-    }
+    Filter: FilterScreen
   },
   { defaultNavigationOptions: defaultStackNavOptions }
 );
+
+// const FilterNavigator = createStackNavigator(
+//   {
+//     Home: {
+//       screen: HomeScreen,
+//       navigationOptions: () => ({
+//         title: `Home`,
+//         headerStyle: {
+//           backgroundColor: Colors.primaryColor
+//         },
+//         headerTintColor: Colors.bColor
+//       })
+//     },
+//     Filter: {
+//       screen: FilterScreen,
+//       navigationOptions: () => ({
+//         headerStyle: {
+//           backgroundColor: Colors.primaryColor
+//         },
+//         headerTintColor: Colors.bColor
+//       })
+//     }
+//   },
+//   { defaultNavigationOptions: defaultStackNavOptions }
+// );
 
 const ListNavigator = createStackNavigator(
   {

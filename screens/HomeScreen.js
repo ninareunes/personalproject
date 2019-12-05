@@ -2,21 +2,22 @@ import React from "react";
 import { View, Button } from "react-native";
 import { SPOTS } from "../data/dummy-data";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import HeaderButton from "../components/HeaderButton";
-// import SearchSvg from "../components/SearchSvg";
 import { Ionicons } from "@expo/vector-icons";
+import styles from "./stylesHome";
 
+import HeaderButton from "../components/HeaderButton";
 import SpotList from "../components/SpotList";
 
 const HomeScreen = props => {
   return (
     <View>
-      <View>
+      <View style={styles.filter}>
         <Button
+          style={styles.filterBtn}
+          name="filter"
           title="Filter"
-          onPress={() => {
-            console.log("hello");
-          }}
+          onPress={() => props.navigation.navigate({ routeName: "Filter" })}
+          leftIcon={{ type: "font-awesome", name: "filter" }}
         />
       </View>
 

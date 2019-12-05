@@ -1,31 +1,17 @@
 import { StyleSheet } from "react-native";
+import Colors from "../constants/Colors";
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 30
+  filter: {
+    alignItems: "flex-end",
+    marginVertical: 16,
+    marginRight: 16
   },
-  header: {
-    width: "100%",
-    flex: 1,
-    backgroundColor: "#fff",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center"
-  },
-
-  title: {
-    flex: 2
-  },
-  buttonSearch: {
-    flex: 1,
-    marginLeft: 16
-  },
-
-  
+  filterBtn: {
+    borderColor: Colors.primaryColor,
+    borderWidth: 2,
+    color: "red"
+  }
 });
 
 export default styles;
