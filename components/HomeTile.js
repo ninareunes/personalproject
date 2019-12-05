@@ -27,11 +27,9 @@ const HomeTile = props => {
         >
           <View style={styles.itemImage}>
             <Image
-              source={{ uri: props.img }}
+              source={props.img}
               style={{ width: 90, height: 90, borderRadius: 90 / 2 }}
-              onPress={() => {
-                console.log({ props });
-              }}
+              onPress={() => {}}
             />
           </View>
           <View style={styles.itemText}>

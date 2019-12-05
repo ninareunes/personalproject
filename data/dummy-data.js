@@ -5,20 +5,26 @@ export const SPOTS = [
     "1",
     "Luigis Place",
     "A small and cosy Italian restaurant",
-    "../assets/rest1.jpg",
+    require("../assets/rest1.jpg"),
     5,
-    false,
-    true,
+    "Mageleinestraat 6",
+    "Gent",
+    "lunch",
+    "$$",
+    "www.ninareunes.be",
     false
   ),
   new Spot(
     "2",
     "Pizza Heaven",
     "The best Pizza in town jummy jummy jummy jummy jummy jummy jummy jummy jummy",
-    "../assets/rest2.jpg",
+    require("../assets/rest2.jpg"),
     4.3,
-    false,
-    true,
+    "Veldstraat 6",
+    "Gent",
+    "dinner",
+    "$",
+    "www.hln.be",
     true
   )
 ];

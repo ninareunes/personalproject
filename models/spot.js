@@ -5,18 +5,24 @@ class Spot {
     description,
     img,
     rating,
-    isVegan,
-    isVegetarian,
-    isChildProof
+    address,
+    city,
+    category,
+    price,
+    url,
+    isOpen
   ) {
     this.id = id;
     this.name = name;
     this.desc = description;
     this.img = img;
     this.rating = rating;
-    this.isVegan = isVegan;
-    this.isVegetarian = isVegetarian;
-    this.isChildProof = isChildProof;
+    this.address = address;
+    this.city = city;
+    this.category = category;
+    this.price = price;
+    this.url = url;
+    this.isOpen = isOpen;
   }
 }
 

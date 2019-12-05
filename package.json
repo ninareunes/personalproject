@@ -10,6 +10,7 @@
   "dependencies": {
     "expo": "^35.0.0",
     "expo-font": "~7.0.0",
+    "expo-web-browser": "~7.0.1",
     "navigation": "^5.2.0",
     "react": "^16.12.0",
     "react-dom": "16.8.3",

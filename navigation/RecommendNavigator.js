@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform } from "react-native";
+import { Platform, Text } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createDrawerNavigator } from "react-navigation-drawer";
@@ -16,102 +16,116 @@ import ListsScreen from "../screens/ListsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import PreferencesScreen from "../screens/PreferencesScreen";
 
-const RecommendNavigator = createStackNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: () => ({
-      title: `Home`,
-      headerBackTitle: `Back`,
-      headerStyle: {
-        backgroundColor: Colors.primaryColor
-      },
-      headerTintColor: Colors.bColor
-    })
+const defaultStackNavOptions = {
+  headerTitleStyle: {
+    fontFamily: "open-sans-bold"
   },
-  BigMap: BigMapScreen,
-  Detail: {
-    screen: DetailScreen,
-    navigationOptions: () => ({
-      headerBackTitle: `Back`,
-      headerStyle: {
-        backgroundColor: Colors.primaryColor
-      },
-      headerTintColor: Colors.bColor
-    })
-  }
-});
-const FilterNavigator = createStackNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: () => ({
-      title: `Home`,
-      headerBackTitle: `Back`,
-      headerStyle: {
-        backgroundColor: Colors.primaryColor
-      },
-      headerTintColor: Colors.bColor
-    })
+  headerBackTitleStyle: {
+    fontFamily: "open-sans"
   },
-  Filter: {
-    screen: FilterScreen,
-    navigationOptions: () => ({
-      headerBackTitle: `Back`,
-      headerStyle: {
-        backgroundColor: Colors.primaryColor
-      },
-      headerTintColor: Colors.bColor
-    })
-  }
-});
+  headerBackTitle: `Back`
+};
 
-const ListNavigator = createStackNavigator({
-  ListOverview: {
-    screen: ListsScreen,
-    navigationOptions: () => ({
-      title: `Your Lists`,
-      headerBackTitle: `Back`,
-      headerStyle: {
-        backgroundColor: Colors.primaryColor
-      },
-      headerTintColor: Colors.bColor
-    })
+const RecommendNavigator = createStackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: () => ({
+        title: `Home`,
+        headerStyle: {
+          backgroundColor: Colors.primaryColor
+        },
+        headerTintColor: Colors.bColor
+      })
+    },
+    BigMap: BigMapScreen,
+    Detail: {
+      screen: DetailScreen,
+      navigationOptions: () => ({
+        headerStyle: {
+          backgroundColor: Colors.primaryColor
+        },
+        headerTintColor: Colors.bColor
+      })
+    }
   },
-  Detail: {
-    screen: DetailScreen,
-    navigationOptions: () => ({
-      headerBackTitle: `Back`,
-      headerStyle: {
-        backgroundColor: Colors.primaryColor
-      },
-      headerTintColor: Colors.bColor
-    })
-  }
-});
+  { defaultNavigationOptions: defaultStackNavOptions }
+);
+const FilterNavigator = createStackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: () => ({
+        title: `Home`,
+        headerStyle: {
+          backgroundColor: Colors.primaryColor
+        },
+        headerTintColor: Colors.bColor
+      })
+    },
+    Filter: {
+      screen: FilterScreen,
+      navigationOptions: () => ({
+        headerStyle: {
+          backgroundColor: Colors.primaryColor
+        },
+        headerTintColor: Colors.bColor
+      })
+    }
+  },
+  { defaultNavigationOptions: defaultStackNavOptions }
+);
 
-const ProfileNavigator = createStackNavigator({
-  ProfileOverview: {
-    screen: ProfileScreen,
-    navigationOptions: () => ({
-      title: `Your Profile`,
-      headerBackTitle: `Back`,
-      headerStyle: {
-        backgroundColor: Colors.primaryColor
-      },
-      headerTintColor: Colors.bColor
-    })
+const ListNavigator = createStackNavigator(
+  {
+    ListOverview: {
+      screen: ListsScreen,
+      navigationOptions: () => ({
+        title: `Your Lists`,
+        headerStyle: {
+          backgroundColor: Colors.primaryColor
+        },
+        headerTintColor: Colors.bColor
+      })
+    },
+    Detail: {
+      screen: DetailScreen,
+      navigationOptions: () => ({
+        headerStyle: {
+          backgroundColor: Colors.primaryColor
+        },
+        headerTintColor: Colors.bColor
+      })
+    }
   },
-  Prefrences: {
-    screen: PreferencesScreen,
-    navigationOptions: () => ({
-      title: `Your Preferences`,
-      headerBackTitle: `Back`,
-      headerStyle: {
-        backgroundColor: Colors.primaryColor
-      },
-      headerTintColor: Colors.bColor
-    })
-  }
-});
+  { defaultNavigationOptions: defaultStackNavOptions }
+);
+
+const ProfileNavigator = createStackNavigator(
+  {
+    ProfileOverview: {
+      screen: ProfileScreen,
+      navigationOptions: () => ({
+        title: `Your Profile`,
+        headerStyle: {
+          backgroundColor: Colors.primaryColor
+        },
+        headerTintColor: Colors.bColor
+      })
+    },
+    Prefrences: {
+      screen: PreferencesScreen,
+      navigationOptions: () => ({
+        title: `Your Preferences`,
+        headerStyle: {
+          backgroundColor: Colors.primaryColor
+        },
+        headerTintColor: Colors.bColor
+      })
+    }
+  },
+  { defaultNavigationOptions: defaultStackNavOptions }
+);
 
 const tabScreenConfig = {
   Home: {
@@ -154,8 +168,14 @@ const RootNavigator =
     : createBottomTabNavigator(tabScreenConfig, {
         tabBarOptions: {
           activeTintColor: Colors.primaryColor,
+          labelStyle: {
+            fontFamily: "open-sans"
+          },
           activeTabStyle: {
             fontFamily: "open-sans-bold"
+          },
+          indicatorStyle: {
+            top: 0
           }
         }
       });

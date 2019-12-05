@@ -12,7 +12,12 @@ const HomeScreen = props => {
   return (
     <View>
       <View>
-        <Button title="Filter" />
+        <Button
+          title="Filter"
+          onPress={() => {
+            console.log("hello");
+          }}
+        />
       </View>
 
       <SpotList listData={SPOTS} navigation={props.navigation} />
