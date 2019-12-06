@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import Colors from "../constants/Colors";
 
 const styles = StyleSheet.create({
@@ -7,10 +7,19 @@ const styles = StyleSheet.create({
     marginVertical: 16,
     marginRight: 16
   },
+
   filterBtn: {
-    borderColor: Colors.primaryColor,
-    borderWidth: 2,
-    color: "red"
+    minHeight: 44,
+    backgroundColor: "white",
+    flexDirection: "row",
+    alignItems: "center"
+  },
+
+  filterText: {
+    fontSize: 17,
+    fontFamily: "open-sans-bold",
+    paddingLeft: 8,
+    color: "#979797"
   }
 });
 

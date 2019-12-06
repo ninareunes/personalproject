@@ -2,7 +2,6 @@ import React from "react";
 import { Platform, Text } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-import { createDrawerNavigator } from "react-navigation-drawer";
 import Colors from "../constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { createAppContainer } from "react-navigation";
@@ -18,7 +17,8 @@ import PreferencesScreen from "../screens/PreferencesScreen";
 
 const defaultStackNavOptions = {
   headerTitleStyle: {
-    fontFamily: "open-sans-bold"
+    fontFamily: "open-sans-bold",
+    fontSize: 18
   },
   headerBackTitleStyle: {
     fontFamily: "open-sans"
@@ -35,7 +35,11 @@ const RecommendNavigator = createStackNavigator(
         headerStyle: {
           backgroundColor: Colors.primaryColor
         },
-        headerTintColor: Colors.bColor
+        headerTintColor: Colors.bColor,
+        headerTitleStyle: {
+          fontFamily: "open-sans-bold",
+          fontSize: 18
+        }
       })
     },
     BigMap: BigMapScreen,
@@ -48,7 +52,19 @@ const RecommendNavigator = createStackNavigator(
         headerTintColor: Colors.bColor
       })
     },
-    Filter: FilterScreen
+    Filter: {
+      screen: FilterScreen,
+      navigationOptions: () => ({
+        headerStyle: {
+          backgroundColor: Colors.primaryColor
+        },
+        headerTintColor: Colors.bColor,
+        headerTitleStyle: {
+          fontFamily: "open-sans-bold",
+          fontSize: 18
+        }
+      })
+    }
   },
   { defaultNavigationOptions: defaultStackNavOptions }
 );

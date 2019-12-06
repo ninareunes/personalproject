@@ -1,24 +1,40 @@
 import React from "react";
-import { View, Button } from "react-native";
+import {
+  View,
+  Platform,
+  Text,
+  TouchableOpacity,
+  TouchableNativeFeedback
+} from "react-native";
 import { SPOTS } from "../data/dummy-data";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import Colors from "../constants/Colors";
+import Icon from "react-native-vector-icons/FontAwesome";
+
 import { Ionicons } from "@expo/vector-icons";
+
 import styles from "./stylesHome";
 
 import HeaderButton from "../components/HeaderButton";
 import SpotList from "../components/SpotList";
 
 const HomeScreen = props => {
+  let TouchableCmp = TouchableOpacity;
+
+  if (Platform.OS === "android" && Platform.Version >= 21) {
+    TouchableCmp = TouchableNativeFeedback;
+  }
   return (
     <View>
       <View style={styles.filter}>
-        <Button
-          style={styles.filterBtn}
-          name="filter"
-          title="Filter"
+        <TouchableCmp
           onPress={() => props.navigation.navigate({ routeName: "Filter" })}
-          leftIcon={{ type: "font-awesome", name: "filter" }}
-        />
+        >
+          <View style={styles.filterBtn}>
+            <Icon name="filter" size={25} color="#979797" />
+            <Text style={styles.filterText}>Filter</Text>
+          </View>
+        </TouchableCmp>
       </View>
 
       <SpotList listData={SPOTS} navigation={props.navigation} />
@@ -31,7 +47,6 @@ HomeScreen.navigationOptions = {
   headerTitleStyle: {
     textAlign: "center",
     flex: 1
-    // marginRight: 90
   },
   headerLeft: (
     <HeaderButtons HeaderButtonComponent={HeaderButton}>

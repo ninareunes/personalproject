@@ -29,9 +29,6 @@ export default function App() {
     );
   }
   return (
-    // <ScrollView>
-    //   <HomeScreen />
-    // </ScrollView>
     <RecommendNavigator />
   );
 }

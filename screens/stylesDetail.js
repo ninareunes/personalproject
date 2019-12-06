@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 
   container: {
     marginHorizontal: 16,
-    marginTop: 16,
+    marginVertical: 16,
     flex: 1
   },
   itemRowSP: {
@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
 
   itemName: {
     fontFamily: "open-sans-bold",
-    fontSize: 25
+    fontSize: 22
   },
 
   itemRating: {
-    fontSize: 18,
+    fontSize: 22,
     fontFamily: "open-sans-bold",
     color: Colors.primaryColor
   },

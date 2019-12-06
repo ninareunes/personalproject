@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  Platform
+  Platform,
+  TouchableNativeFeedback
 } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
