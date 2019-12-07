@@ -3,12 +3,18 @@ import { StyleSheet, Text, View, ScrollView, FlatList } from "react-native";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import { useScreens } from "react-native-screens";
+import { createStore, combineReducers } from "redux";
+import { Provider } from "react-redux";
 
-import HomeScreen from "./screens/HomeScreen";
-import MealsNavigator from "./navigation/RecommendNavigator";
 import RecommendNavigator from "./navigation/RecommendNavigator";
+import spotReducer from "./store/reducers/spots";
 
 useScreens();
+
+const rootReducer = combineReducers({
+  spots: spotReducer
+});
+const store = createStore(rootReducer);
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -29,6 +35,8 @@ export default function App() {
     );
   }
   return (
-    <RecommendNavigator />
+    <Provider store={store}>
+      <RecommendNavigator />
+    </Provider>
   );
 }

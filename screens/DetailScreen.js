@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import {
   Text,
   View,
@@ -15,7 +15,8 @@ import HeaderButton from "../components/HeaderButton";
 
 import styles from "./stylesDetail";
 
-import { SPOTS } from "../data/dummy-data";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleFavorite } from "../store/actions/spots";
 
 const DetailScreen = props => {
   let TouchableURLComponent = TouchableOpacity;
@@ -24,8 +25,28 @@ const DetailScreen = props => {
     TouchableURLComponent = TouchableNativeFeedback;
   }
 
+  const availableSpots = useSelector(state => state.spots.spots);
   const spotId = props.navigation.getParam("spotId");
-  const selectedSpot = SPOTS.find(spot => spot.id === spotId);
+  const currentSpotFavorite = useSelector(state =>
+    state.spots.favoriteSpots.some(spot => spot.id === spotId)
+  ); //id item is part or not of favorites array
+
+  const selectedSpot = availableSpots.find(spot => spot.id === spotId);
+
+  //favorite-ing
+  const dispatch = useDispatch();
+
+  const toggleFavoriteHandler = useCallback(() => {
+    dispatch(toggleFavorite(spotId));
+  }, [dispatch, spotId]); //useCallback to break infinite loop
+
+  useEffect(() => {
+    props.navigation.setParams({ setFavorite: toggleFavoriteHandler });
+  }, [toggleFavoriteHandler]);
+
+  useEffect(() => {
+    props.navigation.setParams({ isFavoriteOrNot: currentSpotFavorite });
+  }, [currentSpotFavorite]);
 
   const capitalCategory =
     selectedSpot.category.charAt(0).toUpperCase() +
@@ -80,21 +101,19 @@ const DetailScreen = props => {
 };
 
 DetailScreen.navigationOptions = navigationData => {
-  const spotId = navigationData.navigation.getParam("spotId");
-
-  const selectedSpot = SPOTS.find(spot => spot.id === spotId);
+  const spotName = navigationData.navigation.getParam("spotName");
+  const toggleFavorite = navigationData.navigation.getParam("setFavorite");
+  const isFavorite = navigationData.navigation.getParam("isFavoriteOrNot");
 
   return {
-    headerTitle: selectedSpot.name,
+    headerTitle: spotName,
     headerRight: (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Bookmark"
           MyIconComponent={MaterialIcons}
-          iconName="bookmark-border"
-          onPress={() => {
-            console.log("Bookmarked");
-          }}
+          iconName={isFavorite ? "bookmark" : "bookmark-border"}
+          onPress={toggleFavorite}
         />
       </HeaderButtons>
     )

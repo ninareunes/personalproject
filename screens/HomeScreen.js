@@ -6,9 +6,9 @@ import {
   TouchableOpacity,
   TouchableNativeFeedback
 } from "react-native";
-import { SPOTS } from "../data/dummy-data";
+import { useSelector } from "react-redux";
+
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import Colors from "../constants/Colors";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import { Ionicons } from "@expo/vector-icons";
@@ -24,6 +24,11 @@ const HomeScreen = props => {
   if (Platform.OS === "android" && Platform.Version >= 21) {
     TouchableCmp = TouchableNativeFeedback;
   }
+
+  const spots = useSelector(state => state.spots.filteredSpots);
+
+  const displayedSpots = spots.filter(spot => spot.name != " ");
+
   return (
     <View>
       <View style={styles.filter}>
@@ -37,7 +42,7 @@ const HomeScreen = props => {
         </TouchableCmp>
       </View>
 
-      <SpotList listData={SPOTS} navigation={props.navigation} />
+      <SpotList listData={displayedSpots} navigation={props.navigation} />
     </View>
   );
 };

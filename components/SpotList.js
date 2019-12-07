@@ -1,10 +1,13 @@
 import React from "react";
 import { FlatList, View, StyleSheet } from "react-native";
 import HomeTile from "../components/HomeTile";
-import { SPOTS } from "../data/dummy-data";
+import { useSelector } from "react-redux";
 
 const SpotList = props => {
+  const favoriteSpots = useSelector(state => state.spots.favoriteSpots);
+
   const renderGridItem = itemData => {
+    const isFavorite = favoriteSpots.some(spot => spot.id === itemData.item.id);
     return (
       <HomeTile
         name={itemData.item.name}
@@ -13,11 +16,12 @@ const SpotList = props => {
         rating={itemData.item.rating}
         style={{ width: "100%" }}
         onSelect={() => {
-          // console.log(itemData.item.img);
           props.navigation.navigate({
             routeName: "Detail",
             params: {
-              spotId: itemData.item.id
+              spotId: itemData.item.id,
+              spotName: itemData.item.name,
+              isFavoriteOrNot: isFavorite
             }
           });
         }}
