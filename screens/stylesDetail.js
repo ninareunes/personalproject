@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
 
   image: {
     height: 500,
-    width: "100%"
+    width: "100%",
+    backgroundColor: Colors.accent
   },
 
   container: {
@@ -42,7 +43,8 @@ const styles = StyleSheet.create({
 
   itemAddress: {
     fontSize: 17,
-    fontFamily: "open-sans"
+    fontFamily: "open-sans",
+    textTransform: "capitalize"
   },
 
   itemStyle: {
@@ -52,7 +54,8 @@ const styles = StyleSheet.create({
   category: {
     fontSize: 17,
     fontFamily: "open-sans",
-    marginTop: 8
+    marginTop: 8,
+    textTransform: "capitalize"
   },
 
   seperator: {

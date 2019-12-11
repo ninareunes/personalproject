@@ -12,6 +12,8 @@ export const SPOTS = [
     "lunch",
     "$$",
     "www.ninareunes.be",
+    false,
+    true,
     false
   ),
   new Spot(
@@ -24,7 +26,9 @@ export const SPOTS = [
     "Gent",
     "dinner",
     "$",
-    "www.hln.be",
+    "www.ninareunes.be",
+    false,
+    true,
     true
   )
 ];

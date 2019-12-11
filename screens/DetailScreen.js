@@ -12,11 +12,12 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/HeaderButton";
+import Detail from "../components/Detail";
 
 import styles from "./stylesDetail";
 
 import { useSelector, useDispatch } from "react-redux";
-import { toggleFavorite } from "../store/actions/spots";
+import { toggleFavorite, detailsSpot } from "../store/actions/spots";
 
 const DetailScreen = props => {
   let TouchableURLComponent = TouchableOpacity;
@@ -25,98 +26,61 @@ const DetailScreen = props => {
     TouchableURLComponent = TouchableNativeFeedback;
   }
 
-  const availableSpots = useSelector(state => state.spots.spots);
-  const spotId = props.navigation.getParam("spotId");
-  const currentSpotFavorite = useSelector(state =>
-    state.spots.favoriteSpots.some(spot => spot.id === spotId)
-  ); //id item is part or not of favorites array
+  const availableSpots = useSelector(state => state.spots.spots); //state beschikbaar maken
+  const spotId = props.navigation.getParam("spotId"); //spotid ophalen
+  const selectedSpot = availableSpots.find(spot => spot.id === spotId); //of  id matches
 
-  const selectedSpot = availableSpots.find(spot => spot.id === spotId);
-
-  //favorite-ing
   const dispatch = useDispatch();
 
-  const toggleFavoriteHandler = useCallback(() => {
-    dispatch(toggleFavorite(spotId));
-  }, [dispatch, spotId]); //useCallback to break infinite loop
-
   useEffect(() => {
-    props.navigation.setParams({ setFavorite: toggleFavoriteHandler });
-  }, [toggleFavoriteHandler]);
+    dispatch(detailsSpot(selectedSpot.id));
+  }, [dispatch]);
 
-  useEffect(() => {
-    props.navigation.setParams({ isFavoriteOrNot: currentSpotFavorite });
-  }, [currentSpotFavorite]);
+  const passedSpot = useSelector(state => state.spots.detailsSpot);
 
-  const capitalCategory =
-    selectedSpot.category.charAt(0).toUpperCase() +
-    selectedSpot.category.slice(1);
-  const capitalCity =
-    selectedSpot.city.charAt(0).toUpperCase() + selectedSpot.city.slice(1);
-  const capitalAddress =
-    selectedSpot.address.charAt(0).toUpperCase() +
-    selectedSpot.address.slice(1);
+  //console.log(passedSpot);
 
-  openWebBrowser = async url => {
-    await WebBrowser.openBrowserAsync("https://" + url);
-  };
+  //FUNCTIONS FOR FAVORITING
+  // const currentSpotFavorite = useSelector(state =>
+  //   state.spots.favoriteSpots.some(spot => spot.id === spotId)
+  // ); //check if spot.id is in favoriteSpots array available
 
-  return (
-    <ScrollView>
-      <View style={styles.imageView}>
-        <Image source={selectedSpot.img} style={styles.image} />
-      </View>
-      <View style={styles.container}>
-        <View style={styles.itemRowSP}>
-          <Text style={styles.itemName}>{selectedSpot.name}</Text>
-          <Text style={styles.itemRating}>{selectedSpot.rating}/5</Text>
-        </View>
+  // const toggleFavoriteHandler = useCallback(() => {
+  //   dispatch(toggleFavorite(spotId));
+  // }, [dispatch, spotId]); //useCallback to break infinite loop
 
-        <View style={styles.itemStyle}>
-          <Text style={styles.category}>{capitalCategory}</Text>
-          <Text style={styles.seperator}>|</Text>
+  // useEffect(() => {
+  //   props.navigation.setParams({ setFavorite: toggleFavoriteHandler });
+  // }, [toggleFavoriteHandler]);
 
-          <Text style={styles.price}>{selectedSpot.price}</Text>
-        </View>
+  // useEffect(() => {
+  //   props.navigation.setParams({ isFavoriteOrNot: currentSpotFavorite });
+  // }, [currentSpotFavorite]);
 
-        <View style={styles.details}>
-          <Text style={styles.itemAddress}>
-            {capitalAddress}, {capitalCity}
-          </Text>
-        </View>
+  // openWebBrowser = async url => {
+  //   await WebBrowser.openBrowserAsync("https://" + url);
+  // };
 
-        <View>
-          <TouchableURLComponent>
-            <Text
-              style={styles.url}
-              onPress={() => openWebBrowser(selectedSpot.url)}
-            >
-              {selectedSpot.url}
-            </Text>
-          </TouchableURLComponent>
-        </View>
-      </View>
-    </ScrollView>
-  );
+  return <Detail data={passedSpot} />;
 };
 
 DetailScreen.navigationOptions = navigationData => {
   const spotName = navigationData.navigation.getParam("spotName");
-  const toggleFavorite = navigationData.navigation.getParam("setFavorite");
-  const isFavorite = navigationData.navigation.getParam("isFavoriteOrNot");
+  // const toggleFavorite = navigationData.navigation.getParam("setFavorite");
+  // const isFavorite = navigationData.navigation.getParam("isFavoriteOrNot");
 
   return {
-    headerTitle: spotName,
-    headerRight: (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item
-          title="Bookmark"
-          MyIconComponent={MaterialIcons}
-          iconName={isFavorite ? "bookmark" : "bookmark-border"}
-          onPress={toggleFavorite}
-        />
-      </HeaderButtons>
-    )
+    headerTitle: spotName
+    // headerRight: (
+    //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
+    //     <Item
+    //       title="Bookmark"
+    //       MyIconComponent={MaterialIcons}
+    //       iconName={isFavorite ? "bookmark" : "bookmark-border"}
+    //       onPress={toggleFavorite}
+    //     />
+    //   </HeaderButtons>
+    // )
   };
 };
 

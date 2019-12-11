@@ -2,9 +2,8 @@ class Spot {
   constructor(
     id,
     name,
-    description,
+    description = "",
     img,
-    rating,
     address,
     city,
     category,
@@ -16,7 +15,6 @@ class Spot {
     this.name = name;
     this.desc = description;
     this.img = img;
-    this.rating = rating;
     this.address = address;
     this.city = city;
     this.category = category;

@@ -7,7 +7,11 @@ const SpotList = props => {
   const favoriteSpots = useSelector(state => state.spots.favoriteSpots);
 
   const renderGridItem = itemData => {
-    const isFavorite = favoriteSpots.some(spot => spot.id === itemData.item.id);
+    let isFavorite = false;
+    if (favoriteSpots) {
+      isFavorite = favoriteSpots.some(spot => spot.id === itemData.item.id);
+    }
+
     return (
       <HomeTile
         name={itemData.item.name}
@@ -19,8 +23,8 @@ const SpotList = props => {
           props.navigation.navigate({
             routeName: "Detail",
             params: {
-              spotId: itemData.item.id,
-              spotName: itemData.item.name,
+              spotId: itemData.item.id, //id meegeven
+              spotName: itemData.item.name, //name meegeven voor in header
               isFavoriteOrNot: isFavorite
             }
           });
@@ -31,13 +35,11 @@ const SpotList = props => {
 
   return (
     <FlatList
-      keyExtractor={(item, index) => item.id}
+      keyExtractor={item => item.id}
       data={props.listData}
       renderItem={renderGridItem}
     />
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default SpotList;

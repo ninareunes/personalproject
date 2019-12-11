@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Platform,
   Text,
   TouchableOpacity,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  FlatList
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchSpots } from "../store/actions/spots";
 
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import Icon from "react-native-vector-icons/FontAwesome";
-
 import { Ionicons } from "@expo/vector-icons";
-
 import styles from "./stylesHome";
 
 import HeaderButton from "../components/HeaderButton";
@@ -25,9 +25,20 @@ const HomeScreen = props => {
     TouchableCmp = TouchableNativeFeedback;
   }
 
-  const spots = useSelector(state => state.spots.filteredSpots);
+  const spots = useSelector(state => state.spots.spots); //slice of state
+  const dispatch = useDispatch();
 
-  const displayedSpots = spots.filter(spot => spot.name != " ");
+  useEffect(() => {
+    dispatch(fetchSpots());
+  }, [dispatch]);
+
+  // const displayedSpots = spots.filter(spot => spot.name != " ");
+
+  // if (spots.length === 0) {
+  //   <View>
+  //     <Text>No spots founded, maybe less specify your filters!</Text>
+  //   </View>;
+  // }
 
   return (
     <View>
@@ -42,7 +53,7 @@ const HomeScreen = props => {
         </TouchableCmp>
       </View>
 
-      <SpotList listData={displayedSpots} navigation={props.navigation} />
+      <SpotList listData={spots} navigation={props.navigation} />
     </View>
   );
 };

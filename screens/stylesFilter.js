@@ -113,12 +113,14 @@ const styles = StyleSheet.create({
   moreText: {
     fontSize: 17,
     fontFamily: "open-sans",
-    marginVertical: 10
+    marginVertical: 10,
+    marginRight: 10
   },
   switch: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    marginVertical: 2
   }
 });
 

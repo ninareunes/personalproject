@@ -16,6 +16,7 @@ const HomeTile = props => {
   if (Platform.OS === "android" && Platform.Version >= 21) {
     TouchableComponent = TouchableNativeFeedback;
   }
+
   return (
     <View style={styles.item}>
       <TouchableComponent style={styles.rippleItem} onPress={props.onSelect}>
@@ -27,8 +28,13 @@ const HomeTile = props => {
         >
           <View style={styles.itemImage}>
             <Image
-              source={props.img}
-              style={{ width: 90, height: 90, borderRadius: 90 / 2 }}
+              source={{ uri: `${props.img}` }}
+              style={{
+                width: 90,
+                height: 90,
+                borderRadius: 90 / 2,
+                backgroundColor: Colors.accent
+              }}
               onPress={() => {}}
             />
           </View>
