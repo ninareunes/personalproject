@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 
   filterBtn: {
     minHeight: 44,
-    backgroundColor: "white",
+
     flexDirection: "row",
     alignItems: "center"
   },
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontFamily: "open-sans-bold",
     paddingLeft: 8,
-    color: "#979797"
+    color: Colors.sndAccent
   }
 });
 

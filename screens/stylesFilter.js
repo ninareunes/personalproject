@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 
   saveButton: {
     minHeight: 44,
-    backgroundColor: Colors.accent,
+    backgroundColor: Colors.sndAccent,
     borderRadius: 10,
     flexDirection: "row",
     justifyContent: "center",
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontFamily: "open-sans-bold",
     paddingLeft: 8,
-    color: Colors.bColor
+    color: "#FFFFFF"
   },
 
   sectionTitle: {

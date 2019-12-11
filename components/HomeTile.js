@@ -41,10 +41,9 @@ const HomeTile = props => {
           <View style={styles.itemText}>
             <View style={styles.NameRating}>
               <Text style={styles.itemTitle}>{props.name}</Text>
-              <Text style={styles.itemRating}>{props.rating}/5</Text>
             </View>
             <Text style={styles.itemDesc} numberOfLines={1}>
-              {props.desc}
+              {props.address}, {props.city}
             </Text>
           </View>
         </View>

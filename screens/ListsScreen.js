@@ -1,7 +1,8 @@
 import React from "react";
 import SpotList from "../components/SpotList";
-import { View, Text } from "react-native";
+import Colors from "../constants/Colors";
 
+import { View, Text } from "react-native";
 import { useSelector } from "react-redux";
 
 const ListsScreen = props => {
@@ -9,7 +10,7 @@ const ListsScreen = props => {
 
   if (favSpots.length === 0 || !favSpots) {
     return (
-      <View>
+      <View style={{ backgroundColor: Colors.bColor, flex: 1 }}>
         <Text>Add some of your favorite must-go-to spots!</Text>
       </View>
     );

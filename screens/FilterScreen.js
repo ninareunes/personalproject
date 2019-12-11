@@ -7,7 +7,6 @@ import {
   Platform,
   Switch
 } from "react-native";
-import { Slider } from "react-native-elements";
 import { useDispatch } from "react-redux";
 import { setFilters } from "../store/actions/spots";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
@@ -18,7 +17,6 @@ import styles from "./stylesFilter";
 
 import HeaderButton from "../components/HeaderButton";
 import FilterSwitch from "../components/FilterSwitch";
-import FilterCheckbox from "../components/FilterCheckbox";
 
 const FilterScreen = props => {
   const { navigation } = props;
@@ -55,7 +53,7 @@ const FilterScreen = props => {
   // const dollars = ["$", "$$", "$$$"];
 
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: Colors.bColor }}>
       <View style={styles.container}>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Moments</Text>
@@ -129,7 +127,7 @@ const FilterScreen = props => {
             }}
             style={styles.saveButton}
           >
-            <Icon name="check" size={25} color={Colors.bColor} />
+            <Icon name="check" size={25} color="#FFFFFF" />
             <Text style={styles.saveText}>Save & Search</Text>
           </TouchableOpacity>
         </View>

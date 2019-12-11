@@ -5,7 +5,7 @@ import {
   Text,
   TouchableOpacity,
   TouchableNativeFeedback,
-  FlatList
+  ScrollView
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchSpots } from "../store/actions/spots";
@@ -13,6 +13,7 @@ import { fetchSpots } from "../store/actions/spots";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
+import Colors from "../constants/Colors";
 import styles from "./stylesHome";
 
 import HeaderButton from "../components/HeaderButton";
@@ -41,20 +42,22 @@ const HomeScreen = props => {
   // }
 
   return (
-    <View>
-      <View style={styles.filter}>
-        <TouchableCmp
-          onPress={() => props.navigation.navigate({ routeName: "Filter" })}
-        >
-          <View style={styles.filterBtn}>
-            <Icon name="filter" size={25} color="#979797" />
-            <Text style={styles.filterText}>Filter</Text>
-          </View>
-        </TouchableCmp>
-      </View>
+    <ScrollView style={{ backgroundColor: Colors.bColor }}>
+      <View>
+        <View style={styles.filter}>
+          <TouchableCmp
+            onPress={() => props.navigation.navigate({ routeName: "Filter" })}
+          >
+            <View style={styles.filterBtn}>
+              <Icon name="filter" size={25} color="#F2BBAE" />
+              <Text style={styles.filterText}>Filter</Text>
+            </View>
+          </TouchableCmp>
+        </View>
 
-      <SpotList listData={spots} navigation={props.navigation} />
-    </View>
+        <SpotList listData={spots} navigation={props.navigation} />
+      </View>
+    </ScrollView>
   );
 };
 
@@ -68,6 +71,7 @@ HomeScreen.navigationOptions = {
     <HeaderButtons HeaderButtonComponent={HeaderButton}>
       <Item
         title="Search"
+        style={{ paddingLeft: 8 }}
         MyIconComponent={Ionicons}
         iconName="ios-search"
         onPress={() => {

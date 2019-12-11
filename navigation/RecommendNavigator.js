@@ -180,20 +180,23 @@ const RootNavigator =
         activeColor: Colors.primaryColor,
         shifting: true,
         barStyle: {
-          backgroundColor: "white"
+          backgroundColor: Colors.bColor
         }
       })
     : createBottomTabNavigator(tabScreenConfig, {
         tabBarOptions: {
-          activeTintColor: Colors.primaryColor,
+          activeTintColor: Colors.sndAccent,
           labelStyle: {
-            fontFamily: "open-sans"
-          },
-          activeTabStyle: {
-            fontFamily: "open-sans-bold"
+            fontFamily: "open-sans",
+            fontSize: 12
           },
           indicatorStyle: {
             top: 0
+          },
+          style: {
+            backgroundColor: Colors.bColor,
+            borderTopColor: "transparent",
+            paddingTop: 2
           }
         }
       });

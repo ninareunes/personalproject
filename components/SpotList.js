@@ -1,7 +1,8 @@
 import React from "react";
-import { FlatList, View, StyleSheet } from "react-native";
+import { FlatList } from "react-native";
 import HomeTile from "../components/HomeTile";
 import { useSelector } from "react-redux";
+import Colors from "../constants/Colors";
 
 const SpotList = props => {
   const favoriteSpots = useSelector(state => state.spots.favoriteSpots);
@@ -17,7 +18,8 @@ const SpotList = props => {
         name={itemData.item.name}
         desc={itemData.item.desc}
         img={itemData.item.img}
-        rating={itemData.item.rating}
+        address={itemData.item.address}
+        city={itemData.item.city}
         style={{ width: "100%" }}
         onSelect={() => {
           props.navigation.navigate({
@@ -38,6 +40,7 @@ const SpotList = props => {
       keyExtractor={item => item.id}
       data={props.listData}
       renderItem={renderGridItem}
+      style={{ backgroundColor: Colors.bColor }}
     />
   );
 };

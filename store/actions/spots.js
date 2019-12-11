@@ -12,7 +12,7 @@ export const fetchSpots = () => {
   versionDate = 20191201;
   return async dispatch => {
     const response = await fetch(
-      `https://api.foursquare.com/v2/venues/explore?client_id=Q0ZIMZQ2FZNLR53UJCIRE2PPEKT53ELE5LDKHQXP2MTDFMST&client_secret=W5C5RGLLVRFASZLBXXJNLHATFFMBJMEH2EKMUYRTBGZIOTFP&v=${versionDate}&limit=${limit}&ll=40.7243,-74.0018&query=${query}`
+      `https://api.foursquare.com/v2/venues/explore?client_id=BYABJHNNNEE0TPKCVF0GDJKEPUVZIUXKJCMXQT50LYYJITIL&client_secret=1BYWX15YDFTMWK0FKO3DUBUVXWDYJOFS4AX0QKANLLFN4OJG&v=${versionDate}&limit=${limit}&ll=40.7243,-74.0018&query=${query}`
     );
     const resData = await response.json();
     let items = resData.response.groups[0].items;
@@ -39,11 +39,10 @@ export const fetchSpots = () => {
 export const detailsSpot = id => {
   return async dispatch => {
     const response = await fetch(
-      `https://api.foursquare.com/v2/venues/${id}?client_id=Q0ZIMZQ2FZNLR53UJCIRE2PPEKT53ELE5LDKHQXP2MTDFMST&client_secret=W5C5RGLLVRFASZLBXXJNLHATFFMBJMEH2EKMUYRTBGZIOTFP&v=20180323`
+      `https://api.foursquare.com/v2/venues/${id}?client_id=BYABJHNNNEE0TPKCVF0GDJKEPUVZIUXKJCMXQT50LYYJITIL&client_secret=1BYWX15YDFTMWK0FKO3DUBUVXWDYJOFS4AX0QKANLLFN4OJG&v=20180323`
     );
 
     const resData = await response.json();
-
     let item = resData.response.venue;
     const chosenSpot = new Spot(
       item.id,

@@ -38,7 +38,11 @@ const styles = StyleSheet.create({
   },
 
   details: {
-    marginTop: 8
+    marginTop: 8,
+    borderBottomColor: "rgba(0, 0, 0, 0.22)",
+    borderBottomWidth: 1,
+    borderRadius: 2,
+    paddingBottom: 10
   },
 
   itemAddress: {
@@ -74,7 +78,17 @@ const styles = StyleSheet.create({
   url: {
     fontSize: 17,
     fontFamily: "open-sans",
-    marginTop: 8
+    marginTop: 8,
+    textAlign: "center",
+    marginBottom: 16,
+    color: Colors.accent
+  },
+  desc: {
+    marginVertical: 16,
+    marginTop: 8,
+    fontSize: 17,
+    fontFamily: "open-sans",
+    lineHeight: 30
   }
 });
 
