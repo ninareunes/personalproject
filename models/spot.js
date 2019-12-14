@@ -3,24 +3,24 @@ class Spot {
     id,
     name,
     description = "",
+    lat,
+    long,
     img,
     address,
     city,
     category,
-    price,
-    url,
-    isOpen
+    url
   ) {
     this.id = id;
     this.name = name;
     this.desc = description;
+    this.lat = lat;
+    this.long = long;
     this.img = img;
     this.address = address;
     this.city = city;
     this.category = category;
-    this.price = price;
     this.url = url;
-    this.isOpen = isOpen;
   }
 }
 

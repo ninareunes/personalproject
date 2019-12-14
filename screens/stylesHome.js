@@ -20,6 +20,13 @@ const styles = StyleSheet.create({
     fontFamily: "open-sans-bold",
     paddingLeft: 8,
     color: Colors.sndAccent
+  },
+  map: {
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "stretch",
+    height: 400,
+    width: "100%"
   }
 });
 

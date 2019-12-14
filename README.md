@@ -16,7 +16,7 @@ Neighbourhood is for everyone who likes to explore new cities or old cities but 
 
 There’s nothing more annoying than looking forward to or being on a nice holiday and realizing that you don’t really know where to go-to for the best pizza margarita, mojito-cocktail or idyllic photo-spot.
 
-Neighbourhood would assist you with that. Local will be your personal assistant that will help you find the best spots in town thanks to the local community, your friends and you.
+Neighbourhood would assist you with that. Neighbourhood will be your personal assistant that will help you find the best spots in town thanks to the Neighbourhood community, your friends and you.
 
 My research question for this project will be: "Where can I easily and quickly find hotspots that manage to perfectly fit with what I want and what's the most user-friendly way of taking them with me on a trip".
 

@@ -6,8 +6,7 @@ const styles = StyleSheet.create({
 
   image: {
     height: 500,
-    width: "100%",
-    backgroundColor: Colors.accent
+    width: "100%"
   },
 
   container: {

@@ -15,6 +15,7 @@ import Colors from "../constants/Colors";
 
 const Detail = props => {
   let TouchableURLComponent = TouchableOpacity;
+  const dollars = ["$", "$$", "$$$", "$$$$"];
 
   if (Platform.OS === "android" && Platform.Version >= 21) {
     TouchableURLComponent = TouchableNativeFeedback;
@@ -27,7 +28,7 @@ const Detail = props => {
   };
 
   if (props.data) {
-    console.log(props.data.url);
+    // console.log(props.data.desc);
   }
   return (
     <ScrollView style={{ backgroundColor: Colors.bColor }}>
@@ -44,8 +45,8 @@ const Detail = props => {
 
             <View style={styles.itemStyle}>
               <Text style={styles.category}>{props.data.category}</Text>
-              <Text style={styles.seperator}>|</Text>
-              <Text style={styles.price}>{props.data.price}</Text>
+              {/* <Text style={styles.seperator}>|</Text> */}
+              {/* <Text style={styles.price}>{dollars[props.data.price - 1]}</Text> */}
             </View>
 
             <View style={styles.details}>

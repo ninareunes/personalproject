@@ -5,8 +5,12 @@ import Colors from "../constants/Colors";
 
 const ProfileScreen = props => {
   return (
-    <View style={{ backgroundColor: Colors.bColor, flex: 1 }}>
-      <Text>Add some of your favorite must-go-to spots!</Text>
+    <View
+      style={{ ...styles.container, backgroundColor: Colors.bColor, flex: 1 }}
+    >
+      <Text style={styles.replaceText}>
+        Add some of your favorite must-go-to spots!
+      </Text>
     </View>
   );
 };

@@ -6,6 +6,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
+  },
+  replaceText: {
+    fontSize: 20,
+    fontFamily: "open-sans-bold",
+    paddingLeft: 8,
+    color: Colors.sndAccent,
+    width: 200,
+    textAlign: "center",
+    lineHeight: 40
   }
 });
 

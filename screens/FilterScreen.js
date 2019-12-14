@@ -30,6 +30,8 @@ const FilterScreen = props => {
   const [isCulture, setIsCulture] = useState(false);
   const [isNightlife, setIsNightlife] = useState(false);
 
+  const [save, setSave] = useState(false);
+
   const dispatch = useDispatch();
 
   const saveFilters = useCallback(() => {
