@@ -106,13 +106,6 @@ const HomeScreen = props => {
 
   let lat = Number(currentLocation.lat);
   let lng = Number(currentLocation.lng);
-  // console.log(typeof lat);
-  // console.log(typeof lng);
-  //console.log(currentLocation);
-
-  if (currentLocation.lat && currentLocation.lng) {
-    console.log("cl vast");
-  }
 
   const mapRegion = {
     latitude: lat,
@@ -132,15 +125,29 @@ const HomeScreen = props => {
     );
   });
 
+  let myCurrentLocation = { latitude: lat, longitude: lng };
+
+  let fetchLocation = { latitude: lat, longitude: lng };
+  if (currentLocation.lat != 0 && currentLocation.lng != 0) {
+    fetchLocation = { latitude: lat, longitude: lng };
+  }
+
+  // useEffect(() => {
+  //   const loadSpots = async () => {
+  //     setIsLoading(true);
+  //     await dispatch(fetchSpots(fetchLocation));
+  //     setIsLoading(false);
+  //   };
+  //   loadSpots();
+  // }, [dispatch]);
+
   useEffect(() => {
-    //console.log("test");
-    const loadSpots = async () => {
-      setIsLoading(true);
-      await dispatch(fetchSpots(lat, lng));
-      setIsLoading(false);
-    };
-    loadSpots();
-  }, [dispatch]);
+    let fetchLocation = { latitude: lat, longitude: lng };
+    if (currentLocation.lat != 0 && currentLocation.lng != 0) {
+      fetchLocation = { latitude: lat, longitude: lng };
+      dispatch(fetchSpots(fetchLocation));
+    }
+  }, [dispatch, currentLocation]);
 
   // const displayedSpots = spots.filter(spot => spot.name != " ");
 
@@ -148,21 +155,6 @@ const HomeScreen = props => {
   //   <View>
   //     <Text>No spots founded, maybe less specify your filters!</Text>
   //   </View>;
-  // }
-
-  // if (isLoadingLL) {
-  //   return (
-  //     <View
-  //       style={{
-  //         flex: 1,
-  //         justifyContent: "center",
-  //         alignItems: "center",
-  //         backgroundColor: Colors.bColor
-  //       }}
-  //     >
-  //       <ActivityIndicator size="large" color={Colors.accent} />
-  //     </View>
-  //   );
   // }
 
   if (isLoading) {
@@ -180,76 +172,76 @@ const HomeScreen = props => {
     );
   }
 
-  let myCurrentLocation = { latitude: lat, longitude: lng };
-
   return (
     <ScrollView style={{ backgroundColor: Colors.bColor }}>
-      <View>
-        <View style={styles.filter}>
-          <TouchableCmp
-            onPress={() => props.navigation.navigate({ routeName: "Filter" })}
-          >
-            <View style={styles.filterBtn}>
-              {/* <Icon name="filter" size={25} color="#F2BBAE" /> */}
-              <Text style={styles.filterText}>Filter</Text>
-            </View>
-          </TouchableCmp>
-        </View>
-        <View style={{ flex: 1 }}>
-          <MapView region={mapRegion} style={styles.map}>
-            {coordinates.map(coordinate => (
+      {currentLocation.lat && currentLocation.lng ? (
+        <View>
+          <View style={styles.filter}>
+            <TouchableCmp
+              onPress={() => props.navigation.navigate({ routeName: "Filter" })}
+            >
+              <View style={styles.filterBtn}>
+                {/* <Icon name="filter" size={25} color="#F2BBAE" /> */}
+                <Text style={styles.filterText}>Filter</Text>
+              </View>
+            </TouchableCmp>
+          </View>
+          <View style={{ flex: 1 }}>
+            <MapView region={mapRegion} style={styles.map}>
+              {coordinates.map(coordinate => (
+                <Marker
+                  onLoad={() => forceUpdate()}
+                  key={coordinate.id}
+                  coordinate={{
+                    latitude: coordinate.latitude,
+                    longitude: coordinate.longitude
+                  }}
+                  pinColor={Colors.sndAccent}
+                >
+                  <Callout tooltip={true} onLoad={() => forceUpdate()}>
+                    <View style={styles.calloutItem}>
+                      <TouchableCmp style={styles.rippleItem}>
+                        <View style={styles.calloutContainer}>
+                          <View style={styles.calloutViewImage}>
+                            <Text style={styles.calloutViewImage}>
+                              <Image
+                                style={styles.calloutImage}
+                                source={{ uri: `${coordinate.img}` }}
+                              />
+                            </Text>
+                          </View>
+
+                          <View style={styles.calloutCTText}>
+                            <Text style={styles.calloutText}>
+                              {coordinate.name}
+                            </Text>
+                          </View>
+                        </View>
+                      </TouchableCmp>
+                    </View>
+                  </Callout>
+                </Marker>
+              ))}
+
               <Marker
-                onLoad={() => forceUpdate()}
-                key={coordinate.id}
-                coordinate={{
-                  latitude: coordinate.latitude,
-                  longitude: coordinate.longitude
-                }}
-                pinColor={Colors.sndAccent}
-              >
-                <Callout tooltip={true} onLoad={() => forceUpdate()}>
-                  <View style={styles.calloutItem}>
-                    <TouchableCmp style={styles.rippleItem}>
-                      <View style={styles.calloutContainer}>
-                        <View style={styles.calloutViewImage}>
-                          <Text style={styles.calloutViewImage}>
-                            <Image
-                              style={styles.calloutImage}
-                              source={{ uri: `${coordinate.img}` }}
-                            />
-                          </Text>
-                        </View>
+                coordinate={myCurrentLocation}
+                pinColor={Colors.accent}
+                title="Your location"
+              />
+            </MapView>
+          </View>
+          <View style={styles.tchMap}>
+            <TouchableCmp
+              onPress={() => props.navigation.navigate({ routeName: "BigMap" })}
+            >
+              <Text style={styles.tchMapText}>Show on a big map</Text>
+            </TouchableCmp>
+          </View>
+          <Text style={styles.sectionTitle}>Your recommendations</Text>
 
-                        <View style={styles.calloutCTText}>
-                          <Text style={styles.calloutText}>
-                            {coordinate.name}
-                          </Text>
-                        </View>
-                      </View>
-                    </TouchableCmp>
-                  </View>
-                </Callout>
-              </Marker>
-            ))}
-
-            <Marker
-              coordinate={myCurrentLocation}
-              pinColor={Colors.accent}
-              title="Your location"
-            />
-          </MapView>
+          <SpotList listData={spots} navigation={props.navigation} />
         </View>
-        <View style={styles.tchMap}>
-          <TouchableCmp
-            onPress={() => props.navigation.navigate({ routeName: "BigMap" })}
-          >
-            <Text style={styles.tchMapText}>Show on a big map</Text>
-          </TouchableCmp>
-        </View>
-        <Text style={styles.sectionTitle}>Your recommendations</Text>
-
-        <SpotList listData={spots} navigation={props.navigation} />
-      </View>
+      ) : null}
     </ScrollView>
   );
 };

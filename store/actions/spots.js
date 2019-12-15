@@ -16,7 +16,7 @@ export const SET_FAVORITES = "SET_FAVORITES";
 //   query = "";
 //   limit = 5;
 //   client_id = "Q0ZIMZQ2FZNLR53UJCIRE2PPEKT53ELE5LDKHQXP2MTDFMST";
-//   client_secret = "W5C5RGLLVRFASZLBXXJNLHATFFMBJMEH2EKMUYRTBGZIOTFP";
+//   client_secret = "KCXKV1MRTCAVBADDZ4HJ4YVGNYGGJQ5CVVN0NLMN1XIEXNAO";
 //   versionDate = 20191201;
 //   return async dispatch => {
 //     const response = await fetch(
@@ -49,17 +49,16 @@ export const SET_FAVORITES = "SET_FAVORITES";
 //   };
 // };
 
-export const fetchSpots = (latitude, longitude) => {
-  // console.log(latitude);
-  // console.log(longitude);
-  lng = 3.726433;
-  lat = 51.041153;
-  intent = "";
+export const fetchSpots = fetchLocation => {
+  lng = fetchLocation.longitude;
+  lat = fetchLocation.latitude;
+  console.log(fetchLocation);
+  intent = "food, bar";
   // lng = lng;
   // lat = lat;
   limit = 7;
-  client_id = "Q0ZIMZQ2FZNLR53UJCIRE2PPEKT53ELE5LDKHQXP2MTDFMST";
-  client_secret = "W5C5RGLLVRFASZLBXXJNLHATFFMBJMEH2EKMUYRTBGZIOTFP";
+  client_id = "WAQ1DXFGRQU2AGEWCSVB14ZVMK4DUSY1F3VNHR3BJ35BWGLN";
+  client_secret = "KCXKV1MRTCAVBADDZ4HJ4YVGNYGGJQ5CVVN0NLMN1XIEXNAO";
   versionDate = 20191201;
   return async dispatch => {
     const response = await fetch(
@@ -99,8 +98,8 @@ export const fetchSpots = (latitude, longitude) => {
 };
 
 export const detailsSpot = id => {
-  client_id = "Q0ZIMZQ2FZNLR53UJCIRE2PPEKT53ELE5LDKHQXP2MTDFMST";
-  client_secret = "W5C5RGLLVRFASZLBXXJNLHATFFMBJMEH2EKMUYRTBGZIOTFP";
+  client_id = "WAQ1DXFGRQU2AGEWCSVB14ZVMK4DUSY1F3VNHR3BJ35BWGLN";
+  client_secret = "KCXKV1MRTCAVBADDZ4HJ4YVGNYGGJQ5CVVN0NLMN1XIEXNAO";
   return async dispatch => {
     const response = await fetch(
       `https://api.foursquare.com/v2/venues/${id}?client_id=${client_id}&client_secret=${client_secret}&v=20180323`
