@@ -7,7 +7,8 @@ import {
   TouchableNativeFeedback,
   ScrollView,
   ActivityIndicator,
-  Alert
+  Alert,
+  Image
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchSpots } from "../store/actions/spots";
@@ -19,10 +20,12 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 import styles from "./stylesHome";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Callout } from "react-native-maps";
+import MarkerSpot from "../models/marker";
 
 import HeaderButton from "../components/HeaderButton";
 import SpotList from "../components/SpotList";
+//import CustomCallout from "../components/CustomCallout";
 
 const HomeScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
@@ -105,7 +108,11 @@ const HomeScreen = props => {
   let lng = Number(currentLocation.lng);
   // console.log(typeof lat);
   // console.log(typeof lng);
-  // console.log(currentLocation);
+  //console.log(currentLocation);
+
+  if (currentLocation.lat && currentLocation.lng) {
+    console.log("cl vast");
+  }
 
   const mapRegion = {
     latitude: lat,
@@ -116,6 +123,14 @@ const HomeScreen = props => {
 
   const spots = useSelector(state => state.spots.spots); //slice of state
   const dispatch = useDispatch();
+
+  let coordinates = [];
+
+  spots.map(spot => {
+    coordinates.push(
+      new MarkerSpot(spot.lat, spot.long, spot.id, spot.name, spot.img)
+    );
+  });
 
   useEffect(() => {
     //console.log("test");
@@ -166,33 +181,72 @@ const HomeScreen = props => {
   }
 
   let myCurrentLocation = { latitude: lat, longitude: lng };
-  //console.log(myCurrentLocation);
 
   return (
     <ScrollView style={{ backgroundColor: Colors.bColor }}>
       <View>
         <View style={styles.filter}>
           <TouchableCmp
-            data={myCurrentLocation}
             onPress={() => props.navigation.navigate({ routeName: "Filter" })}
           >
             <View style={styles.filterBtn}>
-              <Icon name="filter" size={25} color="#F2BBAE" />
+              {/* <Icon name="filter" size={25} color="#F2BBAE" /> */}
               <Text style={styles.filterText}>Filter</Text>
             </View>
           </TouchableCmp>
         </View>
         <View style={{ flex: 1 }}>
           <MapView region={mapRegion} style={styles.map}>
-            <Marker coordinate={myCurrentLocation} pinColor={Colors.accent} />
+            {coordinates.map(coordinate => (
+              <Marker
+                onLoad={() => forceUpdate()}
+                key={coordinate.id}
+                coordinate={{
+                  latitude: coordinate.latitude,
+                  longitude: coordinate.longitude
+                }}
+                pinColor={Colors.sndAccent}
+              >
+                <Callout tooltip={true} onLoad={() => forceUpdate()}>
+                  <View style={styles.calloutItem}>
+                    <TouchableCmp style={styles.rippleItem}>
+                      <View style={styles.calloutContainer}>
+                        <View style={styles.calloutViewImage}>
+                          <Text style={styles.calloutViewImage}>
+                            <Image
+                              style={styles.calloutImage}
+                              source={{ uri: `${coordinate.img}` }}
+                            />
+                          </Text>
+                        </View>
+
+                        <View style={styles.calloutCTText}>
+                          <Text style={styles.calloutText}>
+                            {coordinate.name}
+                          </Text>
+                        </View>
+                      </View>
+                    </TouchableCmp>
+                  </View>
+                </Callout>
+              </Marker>
+            ))}
+
+            <Marker
+              coordinate={myCurrentLocation}
+              pinColor={Colors.accent}
+              title="Your location"
+            />
           </MapView>
+        </View>
+        <View style={styles.tchMap}>
           <TouchableCmp
             onPress={() => props.navigation.navigate({ routeName: "BigMap" })}
-            style={styles.mapContainer}
           >
-            <Text>See on full map</Text>
+            <Text style={styles.tchMapText}>Show on a big map</Text>
           </TouchableCmp>
         </View>
+        <Text style={styles.sectionTitle}>Your recommendations</Text>
 
         <SpotList listData={spots} navigation={props.navigation} />
       </View>

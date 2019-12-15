@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
 
   itemTitle: {
     fontFamily: "open-sans-bold",
-    fontSize: 16
+    fontSize: 16,
+    color: Colors.primaryColor
   },
 
   itemRating: {

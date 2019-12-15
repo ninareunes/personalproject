@@ -10,11 +10,11 @@ import styles from "./stylesCheckbox";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Checkbox = props => {
-  // let TouchableCmp = TouchableOpacity;
+  let TouchableCmp = TouchableOpacity;
 
-  // if (Platform.OS === "android" && Platform.Version >= 21) {
-  //   TouchableCmp = TouchableNativeFeedback;
-  // }
+  if (Platform.OS === "android" && Platform.Version >= 21) {
+    TouchableCmp = TouchableNativeFeedback;
+  }
 
   return (
     <TouchableCmp

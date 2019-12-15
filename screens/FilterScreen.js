@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Platform,
-  Switch
-} from "react-native";
+import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { useDispatch } from "react-redux";
 import { setFilters } from "../store/actions/spots";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
@@ -22,7 +15,11 @@ const FilterScreen = props => {
   const { navigation } = props;
 
   const [isOpen, setIsOpen] = useState(false);
-  const [isBrunch, setIsBrunch] = useState(false);
+  const [isBrunch, setIsBrunch] = useState({
+    intent: "Breakfast",
+    state: false
+  });
+  console.log({ isBrunch });
   const [isLunch, setIsLunch] = useState(false);
   const [isDinner, setIsDinner] = useState(false);
   const [isBar, setIsBar] = useState(false);
@@ -35,12 +32,10 @@ const FilterScreen = props => {
   const dispatch = useDispatch();
 
   const saveFilters = useCallback(() => {
-    //callback= ensures that function isn't recreate everytime comp rerenders otherwise: infinite loop
     const appliedFilters = {
       open: isOpen
     };
-
-    console.log(appliedFilters);
+    //console.log(appliedFilters);
 
     dispatch(setFilters(appliedFilters));
   }, [isOpen, dispatch]);

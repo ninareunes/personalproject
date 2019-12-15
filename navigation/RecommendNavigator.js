@@ -42,7 +42,15 @@ const RecommendNavigator = createStackNavigator(
         }
       })
     },
-    BigMap: BigMapScreen,
+    BigMap: {
+      screen: BigMapScreen,
+      navigationOptions: () => ({
+        headerStyle: {
+          backgroundColor: Colors.primaryColor
+        },
+        headerTintColor: Colors.bColor
+      })
+    },
     Detail: {
       screen: DetailScreen,
       navigationOptions: () => ({
