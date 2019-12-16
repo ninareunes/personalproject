@@ -121,6 +121,23 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginVertical: 2
+  },
+
+  rdbTch: { flexDirection: "row", flexWrap: "wrap", width: 200 },
+  rdbContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    minWidth: 44,
+    minHeight: 44,
+    margin: 10,
+    padding: 10,
+    borderColor: Colors.accent,
+    borderWidth: 1,
+    borderRadius: 10
+  },
+  rdbText: {
+    fontSize: 17,
+    fontFamily: "open-sans"
   }
 });
 

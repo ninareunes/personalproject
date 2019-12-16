@@ -31,18 +31,8 @@ const fetchFonts = () => {
   });
 };
 
-// long = 40.7243;
-// lat = -74.0018;
-// query = "pizza";
-// limit = 2;
-
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
-  // fetch(
-  //   `https://api.foursquare.com/v2/venues/explore?client_id=Q0ZIMZQ2FZNLR53UJCIRE2PPEKT53ELE5LDKHQXP2MTDFMST&client_secret=W5C5RGLLVRFASZLBXXJNLHATFFMBJMEH2EKMUYRTBGZIOTFP&v=20180323&ll=${this.long},${this.lat}&query=${this.query}&limit=${this.limit}`
-  // )
-  //   .then(res => res.json())
-  //   .then(res => console.log(res.response.groups[0].items[0].venue));
 
   if (!fontLoaded) {
     return (

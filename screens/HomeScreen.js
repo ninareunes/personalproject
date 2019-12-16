@@ -115,6 +115,7 @@ const HomeScreen = props => {
   };
 
   const spots = useSelector(state => state.spots.spots); //slice of state
+  const filterValues = useSelector(state => state.spots.appliedFilters);
   const dispatch = useDispatch();
 
   let coordinates = [];
@@ -127,11 +128,6 @@ const HomeScreen = props => {
 
   let myCurrentLocation = { latitude: lat, longitude: lng };
 
-  let fetchLocation = { latitude: lat, longitude: lng };
-  if (currentLocation.lat != 0 && currentLocation.lng != 0) {
-    fetchLocation = { latitude: lat, longitude: lng };
-  }
-
   // useEffect(() => {
   //   const loadSpots = async () => {
   //     setIsLoading(true);
@@ -143,11 +139,13 @@ const HomeScreen = props => {
 
   useEffect(() => {
     let fetchLocation = { latitude: lat, longitude: lng };
+    console.log(filterValues);
+    const filters = { open: filterValues.open, intent: filterValues.intent };
     if (currentLocation.lat != 0 && currentLocation.lng != 0) {
       fetchLocation = { latitude: lat, longitude: lng };
-      dispatch(fetchSpots(fetchLocation));
+      dispatch(fetchSpots(fetchLocation, filters));
     }
-  }, [dispatch, currentLocation]);
+  }, [dispatch, currentLocation, filterValues]);
 
   // const displayedSpots = spots.filter(spot => spot.name != " ");
 

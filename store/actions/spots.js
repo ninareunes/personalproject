@@ -6,63 +6,18 @@ export const SET_SPOTS = "SET_SPOTS";
 export const SET_DETAILS = "SET_DETAILS";
 export const SET_FAVORITES = "SET_FAVORITES";
 
-// export const fetchSpots = (latitude, longitude) => {
-//   // console.log(latitude);
-//   // console.log(longitude);
-//   lng = 3.726433;
-//   lat = 51.041153;
-//   // lng = lng;
-//   // lat = lat;
-//   query = "";
-//   limit = 5;
-//   client_id = "Q0ZIMZQ2FZNLR53UJCIRE2PPEKT53ELE5LDKHQXP2MTDFMST";
-//   client_secret = "KCXKV1MRTCAVBADDZ4HJ4YVGNYGGJQ5CVVN0NLMN1XIEXNAO";
-//   versionDate = 20191201;
-//   return async dispatch => {
-//     const response = await fetch(
-//       `https://api.foursquare.com/v2/venues/explore?client_id=${client_id}&client_secret=${client_secret}&v=${versionDate}&limit=${limit}&ll=${lat},${lng}&query=${query}`
-//     );
-//     const resData = await response.json();
-//     let items = resData.response.groups[0].items;
-//     //console.log(resData);
-
-//     const loadedSpots = [];
-
-//     items.map(item => {
-//       loadedSpots.push(
-//         new Spot(
-//           item.venue.id,
-//           item.venue.name,
-//           "alle spots desc",
-//           item.venue.location.lat,
-//           item.venue.location.lng,
-//           `${item.venue.categories[0].icon.prefix}512${item.venue.categories[0].icon.suffix}`,
-//           item.venue.location.address,
-//           item.venue.location.city,
-//           item.venue.categories[0].name,
-//           "no site found"
-//         )
-//       );
-//     });
-//     dispatch({ type: SET_SPOTS, spots: loadedSpots });
-//     //console.log(loadedSpots);
-//   };
-// };
-
-export const fetchSpots = fetchLocation => {
+export const fetchSpots = (fetchLocation, filters) => {
   lng = fetchLocation.longitude;
   lat = fetchLocation.latitude;
-  console.log(fetchLocation);
-  intent = "food, bar";
-  // lng = lng;
-  // lat = lat;
+  open = filters.open;
+  intent = filters.intent;
   limit = 7;
   client_id = "WAQ1DXFGRQU2AGEWCSVB14ZVMK4DUSY1F3VNHR3BJ35BWGLN";
   client_secret = "KCXKV1MRTCAVBADDZ4HJ4YVGNYGGJQ5CVVN0NLMN1XIEXNAO";
   versionDate = 20191201;
   return async dispatch => {
     const response = await fetch(
-      `https://api.foursquare.com/v2/search/recommendations?client_id=${client_id}&client_secret=${client_secret}&v=${versionDate}&limit=${limit}&ll=${lat},${lng}&intent=${intent}`
+      `https://api.foursquare.com/v2/search/recommendations?client_id=${client_id}&client_secret=${client_secret}&v=${versionDate}&limit=${limit}&ll=${lat},${lng}&intent=${intent}&openNow=${open}`
     );
     const resData = await response.json();
     let items = resData.response.group.results;
@@ -181,4 +136,4 @@ export const deleteFavorite = id => {
 
 export const setFilters = filterSettings => {
   return { type: SET_FILTERS, filters: filterSettings };
-};
+}; //filterSettings = object
