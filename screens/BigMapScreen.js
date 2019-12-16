@@ -32,13 +32,13 @@ const BigMapScreen = props => {
   });
 
   const mapRegion = {
-    latitude: 51.041153,
-    longitude: 3.726433,
+    latitude: lat,
+    longitude: lng,
     latitudeDelta: 0.0099,
     longitudeDelta: 0.0099
   };
 
-  let myCurrentLocation = { latitude: 51.041153, longitude: 3.726433 };
+  let myCurrentLocation = { latitude: lat, longitude: lng };
 
   return (
     <View style={styles.mapContainer}>

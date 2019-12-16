@@ -16,7 +16,6 @@ import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
-import Icon from "react-native-vector-icons/FontAwesome";
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../constants/Colors";
 import styles from "./stylesHome";
@@ -25,11 +24,9 @@ import MarkerSpot from "../models/marker";
 
 import HeaderButton from "../components/HeaderButton";
 import SpotList from "../components/SpotList";
-//import CustomCallout from "../components/CustomCallout";
 
 const HomeScreen = props => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingLL, setIsLoadingLL] = useState(false);
   const [currentLocation, setCurrentLocation] = useState({
     lat: "",
     lng: ""
@@ -66,15 +63,6 @@ const HomeScreen = props => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const loadLL = async () => {
-  //     setIsLoadingLL(true);
-  //     await getUserLocation();
-  //     setIsLoadingLL(false);
-  //   };
-  //   loadLL();
-  // }, []);
-
   const getUserLocation = async () => {
     const hasPermission = await verifyPermissions();
     if (!hasPermission) {
@@ -84,10 +72,6 @@ const HomeScreen = props => {
     try {
       if (!isCancelled) {
         const location = await Location.getCurrentPositionAsync();
-        // {
-        //   maximumAge: 60000, // only for Android
-        //   accuracy: isAndroid ? Location.Accuracy.Low : Location.Accuracy.Lowest
-        // }
 
         setCurrentLocation({
           lat: location.coords.latitude,
@@ -116,6 +100,7 @@ const HomeScreen = props => {
 
   const spots = useSelector(state => state.spots.spots); //slice of state
   const filterValues = useSelector(state => state.spots.appliedFilters);
+  console.log(filterValues);
   const dispatch = useDispatch();
 
   let coordinates = [];
@@ -128,32 +113,18 @@ const HomeScreen = props => {
 
   let myCurrentLocation = { latitude: lat, longitude: lng };
 
-  // useEffect(() => {
-  //   const loadSpots = async () => {
-  //     setIsLoading(true);
-  //     await dispatch(fetchSpots(fetchLocation));
-  //     setIsLoading(false);
-  //   };
-  //   loadSpots();
-  // }, [dispatch]);
-
   useEffect(() => {
     let fetchLocation = { latitude: lat, longitude: lng };
-    console.log(filterValues);
-    const filters = { open: filterValues.open, intent: filterValues.intent };
+    const filters = {
+      open: filterValues.open,
+      intent: filterValues.intent,
+      prices: filterValues.prices
+    };
     if (currentLocation.lat != 0 && currentLocation.lng != 0) {
       fetchLocation = { latitude: lat, longitude: lng };
       dispatch(fetchSpots(fetchLocation, filters));
     }
   }, [dispatch, currentLocation, filterValues]);
-
-  // const displayedSpots = spots.filter(spot => spot.name != " ");
-
-  // if (spots.length === 0) {
-  //   <View>
-  //     <Text>No spots founded, maybe less specify your filters!</Text>
-  //   </View>;
-  // }
 
   if (isLoading) {
     return (
@@ -230,7 +201,15 @@ const HomeScreen = props => {
           </View>
           <View style={styles.tchMap}>
             <TouchableCmp
-              onPress={() => props.navigation.navigate({ routeName: "BigMap" })}
+              onPress={() =>
+                props.navigation.navigate({
+                  routeName: "BigMap",
+                  params: {
+                    lat: lat,
+                    long: lng
+                  }
+                })
+              }
             >
               <Text style={styles.tchMapText}>Show on a big map</Text>
             </TouchableCmp>

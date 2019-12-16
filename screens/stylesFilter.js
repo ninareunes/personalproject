@@ -58,58 +58,6 @@ const styles = StyleSheet.create({
     color: Colors.primaryColor
   },
 
-  momentsitems: {
-    flexDirection: "row",
-    flexWrap: "wrap"
-  },
-
-  momentText: {
-    minWidth: 44,
-    minHeight: 44,
-    fontSize: 17,
-    fontFamily: "open-sans",
-    margin: 10,
-    padding: 10,
-    borderColor: Colors.accent,
-    borderWidth: 1,
-    borderRadius: 10
-
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2
-    // },
-    // shadowOpacity: 0.22,
-    // shadowRadius: 2.22,
-    // elevation: 3
-  },
-
-  selectedMoment: {
-    backgroundColor: Colors.accent,
-    color: "white",
-    overflow: "hidden",
-    minWidth: 44,
-    minHeight: 44,
-    fontSize: 17,
-    fontFamily: "open-sans",
-    margin: 10,
-    padding: 10,
-    borderColor: Colors.accent,
-    borderWidth: 1,
-    borderRadius: 10
-  },
-
-  pricingText: {
-    fontSize: 17,
-    fontFamily: "open-sans",
-    marginVertical: 10
-  },
-
-  radiusText: {
-    fontSize: 17,
-    fontFamily: "open-sans",
-    marginVertical: 10
-  },
-
   moreText: {
     fontSize: 17,
     fontFamily: "open-sans",
@@ -123,21 +71,59 @@ const styles = StyleSheet.create({
     marginVertical: 2
   },
 
-  rdbTch: { flexDirection: "row", flexWrap: "wrap", width: 200 },
+  momentItems: {
+    flex: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginTop: 8
+  },
+
+  rdbTch: {
+    flexDirection: "row",
+    width: 140,
+    marginRight: 40
+  },
+
+  rdbTchPrice: {
+    flexDirection: "row",
+    width: 80,
+    marginRight: 10
+  },
+
   rdbContainer: {
     flexDirection: "row",
     alignItems: "center",
     minWidth: 44,
     minHeight: 44,
-    margin: 10,
     padding: 10,
     borderColor: Colors.accent,
     borderWidth: 1,
-    borderRadius: 10
+    borderRadius: 10,
+    marginVertical:
+      Platform.OS === "android" && Platform.Version >= 21 ? 16 : 8,
+    marginRight: Platform.OS === "android" && Platform.Version >= 21 ? 16 : 10
   },
+
+  rdbContainerPrice: {
+    flexDirection: "row",
+    alignItems: "center",
+    minWidth: 44,
+    minHeight: 44,
+    borderColor: Colors.accent,
+    borderWidth: 1,
+    borderRadius: 10,
+    marginVertical:
+      Platform.OS === "android" && Platform.Version >= 21 ? 16 : 8,
+    marginRight: Platform.OS === "android" && Platform.Version >= 21 ? 16 : 10
+  },
+
   rdbText: {
     fontSize: 17,
-    fontFamily: "open-sans"
+    fontFamily: "open-sans",
+    paddingRight: 30
+  },
+  radiobutton: {
+    color: Colors.sndAccent
   }
 });
 

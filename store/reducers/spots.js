@@ -11,7 +11,7 @@ let SPOTS = [];
 
 const initialState = {
   spots: SPOTS, //all spots
-  appliedFilters: { open: false, intent: "" }, //filteredspots
+  appliedFilters: { open: false, intent: "", prices: "" }, //filteredspots
   favoriteSpots: [] //store data on server so user don't have to restart
 };
 
@@ -45,6 +45,8 @@ const state = (state = initialState, action) => {
 
       //   return true;
       // });
+
+      console.log(action.filters);
       return { ...state, appliedFilters: action.filters };
     default:
       return state;

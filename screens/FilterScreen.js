@@ -19,8 +19,6 @@ import styles from "./stylesFilter";
 import { RadioButton } from "react-native-paper";
 
 import HeaderButton from "../components/HeaderButton";
-//import FilterSwitch from "../components/FilterSwitch";
-import FilterCheckbox from "../components/FilterCheckbox";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -46,7 +44,7 @@ const FilterScreen = props => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [intent, setIntent] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
+  const [prices, setPrices] = useState("");
 
   let TouchableCmp = TouchableOpacity;
 
@@ -54,42 +52,23 @@ const FilterScreen = props => {
     TouchableCmp = TouchableNativeFeedback;
   }
 
-  // const [isBrunch, setIsBrunch] = useState({
-  //   intent: "Breakfast",
-  //   state: false
-  // });
-
-  // const [isLunch, setIsLunch] = useState(false);
-  // const [isDinner, setIsDinner] = useState(false);
-  // const [isBar, setIsBar] = useState(false);
-  // const [isShop, setIsShop] = useState(false);
-  // const [isCulture, setIsCulture] = useState(false);
-  // const [isNightlife, setIsNightlife] = useState(false);
-
   const dispatch = useDispatch();
-  //let appliedFilters;
 
   const saveFilters = useCallback(() => {
     const appliedFilters = {
       open: isOpen,
-      intent: intent
+      intent: intent,
+      prices: prices
     };
 
     dispatch(setFilters(appliedFilters));
-  }, [isOpen, dispatch, intent]);
-
-  //gathers our filters, useCallback makes sure that savefilters only updates when state changes
+  }, [isOpen, dispatch, intent, prices]);
 
   useEffect(() => {
     navigation.setParams({ save: saveFilters });
   }, [saveFilters]);
   //execute function whenever saveFilters changes , save is just a pointer to saveFilters
   //update save whenever state (filters added) changes
-
-  // const [isChangedRadius, setIsChangedRadius] = useState(0.5);
-
-  // const [isChangedPrice, setIsChangedPrice] = useState(1);
-  // const dollars = ["$", "$$", "$$$"];
 
   return (
     <ScrollView style={{ backgroundColor: Colors.bColor }}>
@@ -99,57 +78,25 @@ const FilterScreen = props => {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Moments</Text>
-          <View style={styles.momentitems}>
-            {/* <FilterSwitch
-              label="Brunch"
-              name="food-croissant"
-              state={isBrunch}
-              onChange={newValue => setIsBrunch(newValue)}
-            />
-            <FilterSwitch
-              label="Lunch"
-              name="food-fork-drink"
-              state={isLunch}
-              onChange={newValue => setIsLunch(newValue)}
-            />
-            <FilterSwitch
-              label="Dinner"
-              name="food-variant"
-              state={isDinner}
-              onChange={newValue => setIsDinner(newValue)}
-            />
-            <FilterSwitch
-              label="Bar"
-              name="glass-wine"
-              state={isBar}
-              onChange={newValue => setIsBar(newValue)}
-            />
-            <FilterSwitch
-              label="Shop"
-              name="basket"
-              state={isShop}
-              onChange={newValue => setIsShop(newValue)}
-            />
-            <FilterSwitch
-              label="Culture"
-              name="star"
-              state={isCulture}
-              onChange={newValue => setIsCulture(newValue)}
-            />
-            <FilterSwitch
-              label="Nightlife"
-              name="weather-night"
-              state={isNightlife}
-              onChange={newValue => setIsNightlife(newValue)}
-            /> */}
-            {/*
-            <FilterCheckbox
-              checked={isChecked}
-              label="Nightlife"
-              name="weather-night"
-              onPress={() => console.log("night")}
-            /> */}
-
+          <View style={styles.momentItems}>
+            <TouchableCmp
+              onPress={() => {
+                setIntent("breakfast");
+              }}
+              style={styles.rdbTch}
+            >
+              <View style={styles.rdbContainer}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="breakfast"
+                    status={intent === "breakfast" ? "checked" : "unchecked"}
+                    color="#F2BBAE"
+                    uncheckedColor="#F2BBAE"
+                  />
+                </View>
+                <Text style={styles.rdbText}>Breakfast</Text>
+              </View>
+            </TouchableCmp>
             <TouchableCmp
               onPress={() => {
                 setIntent("lunch");
@@ -162,11 +109,13 @@ const FilterScreen = props => {
                     value="lunch"
                     status={intent === "lunch" ? "checked" : "unchecked"}
                     color="#F2BBAE"
+                    uncheckedColor="#F2BBAE"
                   />
                 </View>
                 <Text style={styles.rdbText}>Lunch</Text>
               </View>
             </TouchableCmp>
+
             <TouchableCmp
               onPress={() => {
                 setIntent("dinner");
@@ -179,28 +128,190 @@ const FilterScreen = props => {
                     value="dinner"
                     status={intent === "dinner" ? "checked" : "unchecked"}
                     color="#F2BBAE"
-                    style={styles.radiobutton}
+                    uncheckedColor="#F2BBAE"
                   />
                 </View>
                 <Text style={styles.rdbText}>Dinner</Text>
               </View>
             </TouchableCmp>
 
-            {/* <RadioButton
-              value="lunch"
-              status={intent === "lunch" ? "checked" : "unchecked"}
+            <TouchableCmp
               onPress={() => {
-                setIntent("lunch");
+                setIntent("coffee");
               }}
-              color="#F2BBAE"
-            /> */}
-            <RadioButton
-              value="shopping"
-              status={intent === "shopping" ? "checked" : "unchecked"}
+              style={styles.rdbTch}
+            >
+              <View style={styles.rdbContainer}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="coffee"
+                    status={intent === "coffee" ? "checked" : "unchecked"}
+                    color="#F2BBAE"
+                    uncheckedColor="#F2BBAE"
+                  />
+                </View>
+                <Text style={styles.rdbText}>Coffee</Text>
+              </View>
+            </TouchableCmp>
+
+            <TouchableCmp
+              onPress={() => {
+                setIntent("dessert");
+              }}
+              style={styles.rdbTch}
+            >
+              <View style={styles.rdbContainer}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="dessert"
+                    status={intent === "dessert" ? "checked" : "unchecked"}
+                    color="#F2BBAE"
+                    uncheckedColor="#F2BBAE"
+                  />
+                </View>
+                <Text style={styles.rdbText}>Dessert</Text>
+              </View>
+            </TouchableCmp>
+
+            <TouchableCmp
+              onPress={() => {
+                setIntent("drinks");
+              }}
+              style={styles.rdbTch}
+            >
+              <View style={styles.rdbContainer}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="drinks"
+                    status={intent === "drinks" ? "checked" : "unchecked"}
+                    color="#F2BBAE"
+                    uncheckedColor="#F2BBAE"
+                  />
+                </View>
+                <Text style={styles.rdbText}>Drinks</Text>
+              </View>
+            </TouchableCmp>
+
+            <TouchableCmp
               onPress={() => {
                 setIntent("shopping");
               }}
-            />
+              style={styles.rdbTch}
+            >
+              <View style={styles.rdbContainer}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="shopping"
+                    status={intent === "shopping" ? "checked" : "unchecked"}
+                    color="#F2BBAE"
+                    uncheckedColor="#F2BBAE"
+                  />
+                </View>
+                <Text style={styles.rdbText}>Shopping</Text>
+              </View>
+            </TouchableCmp>
+
+            <TouchableCmp
+              onPress={() => {
+                setIntent("fun");
+              }}
+              style={styles.rdbTch}
+            >
+              <View style={styles.rdbContainer}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="fun"
+                    status={intent === "fun" ? "checked" : "unchecked"}
+                    color="#F2BBAE"
+                    uncheckedColor="#F2BBAE"
+                  />
+                </View>
+                <Text style={styles.rdbText}>Fun</Text>
+              </View>
+            </TouchableCmp>
+
+            <TouchableCmp
+              onPress={() => {
+                setIntent("sights");
+              }}
+              style={styles.rdbTch}
+            >
+              <View style={styles.rdbContainer}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="sights"
+                    status={intent === "sights" ? "checked" : "unchecked"}
+                    color="#F2BBAE"
+                    uncheckedColor="#F2BBAE"
+                  />
+                </View>
+                <Text style={styles.rdbText}>Sights</Text>
+              </View>
+            </TouchableCmp>
+          </View>
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Price Range</Text>
+          <View style={styles.momentItems}>
+            <TouchableCmp
+              onPress={() => {
+                setPrices("1");
+              }}
+              style={styles.rdbTchPrice}
+            >
+              <View style={styles.rdbContainerPrice}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="1"
+                    status={prices === "1" ? "checked" : "unchecked"}
+                    color="#F2BBAE"
+                    uncheckedColor="#F2BBAE"
+                  />
+                </View>
+                <Text style={styles.rdbText}>$</Text>
+              </View>
+            </TouchableCmp>
+            <TouchableCmp
+              onPress={() => {
+                setPrices("2");
+              }}
+              style={styles.rdbTchPrice}
+            >
+              <View style={styles.rdbContainerPrice}>
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="2"
+                    status={prices === "2" ? "checked" : "unchecked"}
+                    color="#F2BBAE"
+                    uncheckedColor="#F2BBAE"
+                  />
+                </View>
+                <Text style={styles.rdbText}>$$</Text>
+              </View>
+            </TouchableCmp>
+            <TouchableCmp
+              onPress={() => {
+                setPrices("3");
+              }}
+              style={styles.rdbTchPrice}
+            >
+              <View
+                style={{
+                  ...styles.rdbContainerPrice,
+                  ...{ marginLeft: Platform.OS === "ios" ? 10 : 0 }
+                }}
+              >
+                <View pointerEvents="none">
+                  <RadioButton
+                    value="3"
+                    status={prices === "3" ? "checked" : "unchecked"}
+                    color="#F2BBAE"
+                    uncheckedColor="#F2BBAE"
+                  />
+                </View>
+                <Text style={styles.rdbText}>$$$</Text>
+              </View>
+            </TouchableCmp>
           </View>
         </View>
 
@@ -213,17 +324,6 @@ const FilterScreen = props => {
               onChange={newValue => setIsOpen(newValue)}
             />
           </View>
-        </View>
-        <View style={styles.sectionButton}>
-          <TouchableOpacity
-            onPress={() => {
-              console.log(`${isOpen}`);
-            }}
-            style={styles.saveButton}
-          >
-            {/* <Icon name="check" size={25} color="#FFFFFF" /> */}
-            <Text style={styles.saveText}>Save & Search</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>

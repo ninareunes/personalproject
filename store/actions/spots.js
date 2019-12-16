@@ -11,13 +11,15 @@ export const fetchSpots = (fetchLocation, filters) => {
   lat = fetchLocation.latitude;
   open = filters.open;
   intent = filters.intent;
+  prices = filters.prices;
+
   limit = 7;
   client_id = "WAQ1DXFGRQU2AGEWCSVB14ZVMK4DUSY1F3VNHR3BJ35BWGLN";
   client_secret = "KCXKV1MRTCAVBADDZ4HJ4YVGNYGGJQ5CVVN0NLMN1XIEXNAO";
   versionDate = 20191201;
   return async dispatch => {
     const response = await fetch(
-      `https://api.foursquare.com/v2/search/recommendations?client_id=${client_id}&client_secret=${client_secret}&v=${versionDate}&limit=${limit}&ll=${lat},${lng}&intent=${intent}&openNow=${open}`
+      `https://api.foursquare.com/v2/search/recommendations?client_id=${client_id}&client_secret=${client_secret}&v=${versionDate}&limit=${limit}&ll=${lat},${lng}&intent=${intent}&openNow=${open}&prices=${prices}`
     );
     const resData = await response.json();
     let items = resData.response.group.results;
